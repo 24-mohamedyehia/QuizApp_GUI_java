@@ -178,9 +178,100 @@ public class Quiz extends JFrame implements ActionListener {
       
       start(count);
       
+      setTitle("Quize App"); 
       setVisible(true);
+      setLocation(70, 70);
+      // setResizable(false);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
   
+  
+  public void paint(Graphics g) {
+    super.paint(g);
+    
+    String time = "Time left - " + timer + " seconds"; // 15
+    g.setColor(Color.RED);
+    g.setFont(new Font("Tahoma", Font.BOLD, 25));
+    
+    if (timer > 0) { 
+        g.drawString(time, 1100, 500);
+    } else {
+        g.drawString("Times up!!", 1100, 500);
+    }
+    
+    timer--; // 14
+    
+    try {
+        Thread.sleep(1000);
+        repaint();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    
+    if (ans_given == 1) {
+        ans_given = 0;
+        timer = 15;
+    } else if (timer < 0) {
+        timer = 15;
+        opt1.setEnabled(true);
+        opt2.setEnabled(true);
+        opt3.setEnabled(true);
+        opt4.setEnabled(true);
+        
+        if (count == 8) {
+            next.setEnabled(false);
+            submit.setEnabled(true);
+        }
+        if (count == 9) { // submit button
+            if (groupoptions.getSelection() == null) {
+                useranswers[count][0] = "";
+            } else {
+                useranswers[count][0] = groupoptions.getSelection().getActionCommand();
+            }
+            
+            for (int i = 0; i < useranswers.length; i++) {
+                if (useranswers[i][0].equals(answers[i][1])) {
+                    score += 10;
+                } else {
+                    score += 0;
+                }
+            }
+            setVisible(false);
+            new Score(name, score);
+        } else { // next button
+            if (groupoptions.getSelection() == null) {
+            useranswers[count][0] = "";
+            } else {
+                useranswers[count][0] = groupoptions.getSelection().getActionCommand();
+            }
+            count++; // 0 // 1
+            start(count);
+        }
+    }
+    
+  }
+  
+  
+  public void start(int count) {
+    qno.setText("" + (count + 1) + ". ");
+    question.setText(questions[count][0]);
+    opt1.setText(questions[count][1]);
+    opt1.setActionCommand(questions[count][1]);
+    
+    opt2.setText(questions[count][2]);
+    opt2.setActionCommand(questions[count][2]);
+    
+    opt3.setText(questions[count][3]);
+    opt3.setActionCommand(questions[count][3]);
+    
+    opt4.setText(questions[count][4]);
+    opt4.setActionCommand(questions[count][4]);
+    
+    groupoptions.clearSelection();
+  }
+
+
+  @Override
   public void actionPerformed(ActionEvent ae) {
       if (ae.getSource() == next) {
           repaint();
@@ -231,91 +322,6 @@ public class Quiz extends JFrame implements ActionListener {
           new Score(name, score);
       }
   }
-  
-  public void paint(Graphics g) {
-      super.paint(g);
-      
-      String time = "Time left - " + timer + " seconds"; // 15
-      g.setColor(Color.RED);
-      g.setFont(new Font("Tahoma", Font.BOLD, 25));
-      
-      if (timer > 0) { 
-          g.drawString(time, 1100, 500);
-      } else {
-          g.drawString("Times up!!", 1100, 500);
-      }
-      
-      timer--; // 14
-      
-      try {
-          Thread.sleep(1000);
-          repaint();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      
-      if (ans_given == 1) {
-          ans_given = 0;
-          timer = 15;
-      } else if (timer < 0) {
-          timer = 15;
-          opt1.setEnabled(true);
-          opt2.setEnabled(true);
-          opt3.setEnabled(true);
-          opt4.setEnabled(true);
-          
-          if (count == 8) {
-              next.setEnabled(false);
-              submit.setEnabled(true);
-          }
-          if (count == 9) { // submit button
-              if (groupoptions.getSelection() == null) {
-                  useranswers[count][0] = "";
-              } else {
-                  useranswers[count][0] = groupoptions.getSelection().getActionCommand();
-              }
-              
-              for (int i = 0; i < useranswers.length; i++) {
-                  if (useranswers[i][0].equals(answers[i][1])) {
-                      score += 10;
-                  } else {
-                      score += 0;
-                  }
-              }
-              setVisible(false);
-              new Score(name, score);
-          } else { // next button
-              if (groupoptions.getSelection() == null) {
-              useranswers[count][0] = "";
-              } else {
-                  useranswers[count][0] = groupoptions.getSelection().getActionCommand();
-              }
-              count++; // 0 // 1
-              start(count);
-          }
-      }
-      
-  }
-  
-  public void start(int count) {
-      qno.setText("" + (count + 1) + ". ");
-      question.setText(questions[count][0]);
-      opt1.setText(questions[count][1]);
-      opt1.setActionCommand(questions[count][1]);
-      
-      opt2.setText(questions[count][2]);
-      opt2.setActionCommand(questions[count][2]);
-      
-      opt3.setText(questions[count][3]);
-      opt3.setActionCommand(questions[count][3]);
-      
-      opt4.setText(questions[count][4]);
-      opt4.setActionCommand(questions[count][4]);
-      
-      groupoptions.clearSelection();
-  }
-  
-  public static void main(String[] args) {
-      new Quiz("User");
-  }
+
+
 }

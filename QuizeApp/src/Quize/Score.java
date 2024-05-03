@@ -7,6 +7,7 @@ import java.awt.event.*;
 public class Score extends JFrame implements ActionListener {
 
     Score(String name, int score) {
+        
         setBounds(400, 150, 750, 550);
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -35,15 +36,17 @@ public class Score extends JFrame implements ActionListener {
         submit.addActionListener(this);
         add(submit);
         
+        // Set window title, size, location, visibility, and close operation
+        setTitle("Quize App"); 
+        setSize(1200, 600);
+        setLocation(70, 70);
         setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void actionPerformed(ActionEvent ae) {
         setVisible(false);
         new Login();
-    }
-
-    public static void main(String[] args) {
-        new Score("User", 0);
     }
 }

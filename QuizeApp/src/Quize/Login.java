@@ -14,64 +14,81 @@ public class Login extends JFrame implements ActionListener {
 
   // Declare buttons and text field for login
   JButton rules, Exit;
-  JTextField tfname;
+  JTextField tf1;
+  JPasswordField tp1;
 
   // Constructor for initializing the login window
   public Login() {
 
     // Set background color and layout to null for manual component positioning
-    getContentPane().setBackground(Color.WHITE);
+    getContentPane().setBackground(Color.decode("#ffffff"));
     setLayout(null);
 
     // Load login image
-    ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("./icons/login.jpeg"));
+    ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("./icons/login.jpg"));
 
     // Create and configure label to display the login image
     JLabel image = new JLabel(i1);
-    image.setBounds(0, 0, 600, 500);
+    image.setSize(600, 700);
+    image.setBounds(0, 0, 700, 700);
     add(image);
 
     // Create and configure heading label
-    JLabel heading = new JLabel("Simple Minds");
-    heading.setBounds(750, 60, 300, 45);
-    heading.setFont(new Font("Viner Hand ITC", Font.BOLD, 40));
-    heading.setForeground(new Color(30, 144, 254));
+    JLabel heading = new JLabel("Quize App");
+    heading.setBounds(900, 60, 300, 45);
+    heading.setFont(new Font("Mongolian Baiti", Font.BOLD, 40));
+    heading.setForeground(Color.BLACK);
     add(heading);
 
     // Create and configure label for entering name
     JLabel name = new JLabel("Enter your name");
-    name.setBounds(810, 150, 300, 20);
+    name.setBounds(850, 200, 300, 20);
     name.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
-    name.setForeground(new Color(30, 144, 254));
+    name.setForeground(Color.BLACK);
     add(name);
 
     // Create and configure text field for entering name
-    tfname = new JTextField();
-    tfname.setBounds(735, 200, 300, 25);
-    tfname.setFont(new Font("Times New Roman", Font.BOLD, 20));
-    add(tfname);
+    tf1 = new JTextField();
+    tf1.setBounds(850, 250, 300, 25);
+    tf1.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    add(tf1);
+
+    JLabel pass = new JLabel("Enter your Password");
+    pass.setBounds(850, 300, 300, 20);
+    pass.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
+    pass.setForeground(Color.BLACK);
+    add(pass);
+
+    // Create and configure text field for entering password
+    tp1 = new JPasswordField();
+    tp1.setBounds(850, 350, 300, 25);
+    tp1.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    add(tp1);
 
     // Create and configure button for displaying rules
     rules = new JButton("Rules");
-    rules.setBounds(735, 270, 120, 25);
-    rules.setBackground(new Color(30, 144, 254));
-    rules.setForeground(Color.WHITE);
+    rules.setBounds(850, 500, 120, 40);
+    rules.setBackground(Color.decode("#a4d82e"));
+    rules.setForeground(Color.BLACK);
     rules.addActionListener(this);
     add(rules);
 
     // Create and configure button for going back
     Exit = new JButton("Exit");
-    Exit.setBounds(915, 270, 120, 25);
-    Exit.setBackground(new Color(30, 144, 254));
-    Exit.setForeground(Color.WHITE);
+    Exit.setBounds(1030, 500, 120, 40);
+    Exit.setBackground(Color.decode("#a4d82e"));
+    Exit.setForeground(Color.BLACK);
     Exit.addActionListener(this);
     add(Exit);
 
     // Set window title, size, location, visibility, and close operation
     setTitle("Quize App"); 
-    setSize(1200, 500);
-    setLocation(100, 150);
+    setSize(1300, 700);
+    setLocation(20, 20);
     setVisible(true);
+    setResizable(false);
+    Image i2 = new ImageIcon(this.getClass().getResource("../icons/icons8-quiz-64.png")).getImage();
+    this.setIconImage(i2);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
@@ -80,7 +97,7 @@ public class Login extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == rules) {
       // Get name from text field, hide login window, and show rules window
-      String name = tfname.getText();
+      String name = tf1.getText();
       setVisible(false);
       new Rules(name);
     } 
