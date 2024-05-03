@@ -10,7 +10,7 @@ import java.awt.event.*;
  * Create a class for the login window,
  * implement ActionListener for handling button clicks
  */
-public class Login extends JFrame implements ActionListener {
+public class Login extends Frames implements ActionListener {
 
   // Declare buttons and text field for login
   JButton rules, Exit;
@@ -19,10 +19,7 @@ public class Login extends JFrame implements ActionListener {
 
   // Constructor for initializing the login window
   public Login() {
-
-    // Set background color and layout to null for manual component positioning
-    getContentPane().setBackground(Color.decode("#ffffff"));
-    setLayout(null);
+    super();
 
     // Load login image
     ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("./icons/login.jpg"));
@@ -80,16 +77,6 @@ public class Login extends JFrame implements ActionListener {
     Exit.setForeground(Color.BLACK);
     Exit.addActionListener(this);
     add(Exit);
-
-    // Set window title, size, location, visibility, and close operation
-    setTitle("Quize App"); 
-    setSize(1300, 700);
-    setLocation(20, 20);
-    setVisible(true);
-    setResizable(false);
-    Image i2 = new ImageIcon(this.getClass().getResource("../icons/icons8-quiz-64.png")).getImage();
-    this.setIconImage(i2);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   // Method to handle button clicks
@@ -102,7 +89,8 @@ public class Login extends JFrame implements ActionListener {
       new Rules(name);
     } 
     else if (e.getSource() == Exit) {
-      dispose();
+      // Exit the program
+      System.exit(0);
     }
   }
 }

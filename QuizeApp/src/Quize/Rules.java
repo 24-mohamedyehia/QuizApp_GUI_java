@@ -11,7 +11,7 @@ import java.awt.event.*;
  * Create a class for displaying rules of the quiz,
  * implement ActionListener for handling button clicks
  */
-public class Rules extends JFrame implements ActionListener{
+public class Rules extends Frames implements ActionListener{
 
   // Declare variables for player name, start button, and back button
   String name;
@@ -19,11 +19,9 @@ public class Rules extends JFrame implements ActionListener{
   
   // Constructor for initializing the Rules window with the player's name
   Rules(String name) {
+    super();
+
     this.name = name;
-    
-    // Set background color and layout to null for manual component positioning
-    getContentPane().setBackground(Color.WHITE);
-    setLayout(null);
     
     // Create and configure heading label
     JLabel heading = new JLabel("Welcome " + name + " to Simple Minds");
@@ -66,13 +64,6 @@ public class Rules extends JFrame implements ActionListener{
     start.addActionListener(this);
     add(start);
     
-    // Set window title, size, location, visibility, and close operation
-    setTitle("Quize App"); 
-    setSize(1200, 600);
-    setLocation(70, 70);
-    setVisible(true);
-    setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
   
   // Method to handle button clicks
