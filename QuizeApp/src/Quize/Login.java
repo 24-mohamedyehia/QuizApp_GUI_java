@@ -16,26 +16,24 @@ public class Login extends Frames implements ActionListener {
   JButton Login, signUp;
   JTextField userEmail, userName;
   JPasswordField userPassword;
-  JLabel errorMessageLabel, heading, emaiLabel, passwordLabel, nameLabel, errorMassageEmpty;
+  JLabel errorMessageLabel, heading, emaiLabel, passwordLabel, nameLabel, errorMassageEmpty, image;
+
+
 
   // Constructor for initializing the login window
   public Login() {
     super();
 
-    // Load login image
-    ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("./icons/login.jpg"));
+    iconWorld(true);
+    
+    
 
-    // Create and configure label to display the login image
-    JLabel image = new JLabel(i1);
-    image.setSize(600, 700);
-    image.setBounds(0, 0, 700, 700);
-    add(image);
-
+    // ####################################################
     // Create and configure heading label
     heading = new JLabel("Quize App");
     heading.setBounds(900, 60, 300, 45);
     heading.setFont(new Font("Mongolian Baiti", Font.BOLD, 40));
-    heading.setForeground(Color.decode("#82ac20"));
+    heading.setForeground(Color.decode("#0099cc"));
     add(heading);
 
     // ####################################################
@@ -88,7 +86,7 @@ public class Login extends Frames implements ActionListener {
     // Create and configure button for displaying rules
     Login = new JButton("Login");
     Login.setBounds(850, 500, 120, 40);
-    Login.setBackground(Color.decode("#a4d82e"));
+    Login.setBackground(Color.decode("#99e6ff"));
     Login.setForeground(Color.BLACK);
     Login.addActionListener(this);
     add(Login);
@@ -98,7 +96,7 @@ public class Login extends Frames implements ActionListener {
     // Create and configure button for going back
     signUp = new JButton("sign up");
     signUp.setBounds(1030, 500, 120, 40);
-    signUp.setBackground(Color.decode("#a4d82e"));
+    signUp.setBackground(Color.decode("#99e6ff"));
     signUp.setForeground(Color.BLACK);
     signUp.setVisible(true); // Initially hidden
     signUp.addActionListener(this);
@@ -146,6 +144,18 @@ public class Login extends Frames implements ActionListener {
   }
 
   // ######################## Methods ############################################
+
+  private void iconWorld(boolean status){
+    ImageIcon shieldIcon = new ImageIcon(getClass().getResource("/icons/world-creativity-and-innovation-day.gif"));
+    JLabel shieldLabel = new JLabel(shieldIcon);
+    shieldLabel.setSize(shieldIcon.getIconWidth() , shieldIcon.getIconHeight());
+    shieldLabel.setBounds(0, 0, 700, 700);
+    add(shieldLabel);
+    validate(); // Ensure the new component is displayed
+    shieldLabel.setVisible(status);
+  }
+
+  
 
   // Method to validate email and password 
   private boolean isValidUser(String email, String password) {
@@ -211,10 +221,13 @@ public class Login extends Frames implements ActionListener {
       
       // Dummy validation (replace with your actual validation logic)
       if (isValidUser(email, password)) {
+
+        iconWorld(false);
+
         // If email and password are valid, proceed to rules window
         new Rules(email);
         setVisible(false);
-        
+    
       } 
       else {
         // If email and password are not valid, show error message
@@ -224,5 +237,7 @@ public class Login extends Frames implements ActionListener {
       }
     }
   }
+
+
 
 }
