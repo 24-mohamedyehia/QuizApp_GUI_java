@@ -37,7 +37,7 @@ public class Score extends Frames implements ActionListener {
   
   @Override
   public void actionPerformed(ActionEvent ae) {
-      setVisible(false);
       new Login();
+      setVisible(false);
   }
 }

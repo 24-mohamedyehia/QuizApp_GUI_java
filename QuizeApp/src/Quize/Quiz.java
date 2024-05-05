@@ -227,8 +227,8 @@ public class Quiz extends Frames implements ActionListener {
                     score += 0;
                 }
             }
-            setVisible(false);
             new Score(name, score);
+            setVisible(false);
         } else { // next button
             if (groupoptions.getSelection() == null) {
             useranswers[count][0] = "";
@@ -309,8 +309,8 @@ public class Quiz extends Frames implements ActionListener {
                   score += 0;
               }
           }
-          setVisible(false);
           new Score(name, score);
+          setVisible(false);
       }
   }
 

@@ -71,13 +71,13 @@ public class Rules extends Frames implements ActionListener{
   
   if (ae.getSource() == start) {
     // Start the quiz
-    setVisible(false);
     new Quiz(name);
+    setVisible(false);
   } 
   else {
     // Go back to the login window
-    setVisible(false);
     new Login();
+    setVisible(false);
   }
   }
 }
