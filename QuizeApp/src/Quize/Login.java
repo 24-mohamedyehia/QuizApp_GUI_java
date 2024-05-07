@@ -16,7 +16,7 @@ public class Login extends Frames implements ActionListener {
   JButton Login, signUp;
   JTextField userEmail, userName;
   JPasswordField userPassword;
-  JLabel errorMessageLabel, heading, emaiLabel, passwordLabel, nameLabel, errorMassageEmpty, image;
+  JLabel errorMessageLabel, heading, emaiLabel, nameLabel, errorMassageEmpty, image;
 
 
 
@@ -25,8 +25,6 @@ public class Login extends Frames implements ActionListener {
     super();
 
     iconWorld(true);
-    
-    
 
     // ####################################################
     // Create and configure heading label
@@ -37,49 +35,32 @@ public class Login extends Frames implements ActionListener {
     add(heading);
 
     // ####################################################
-    // Create and configure label for entering name
+
     nameLabel = new JLabel("Enter Your Name");
-    nameLabel.setBounds(850, 150, 300, 20);
+    nameLabel.setBounds(850, 250, 300, 20);
     nameLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
     nameLabel.setForeground(Color.BLACK);
-    nameLabel.setVisible(false); // Initially hidden
     add(nameLabel);
 
-    // Create and configure text field for entering name
     userName = new JTextField();
-    userName.setBounds(850, 180, 300, 40);
+    userName.setBounds(850, 280, 300, 40);
     userName.setFont(new Font("Times New Roman", Font.BOLD, 20));
-    userName.setVisible(false); // Initially hidden
     add(userName);
+
 
     // ####################################################
 
-    // Create and configure label for entering name
     emaiLabel = new JLabel("Enter Your Email");
-    emaiLabel.setBounds(850, 250, 300, 20);
+    emaiLabel.setBounds(850, 350, 300, 20);
     emaiLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
     emaiLabel.setForeground(Color.BLACK);
     add(emaiLabel);
 
-    // Create and configure text field for entering name
+    // Create and configure text field for entering password
     userEmail = new JTextField();
-    userEmail.setBounds(850, 280, 300, 40);
+    userEmail.setBounds(850, 380, 300, 40);
     userEmail.setFont(new Font("Times New Roman", Font.BOLD, 20));
     add(userEmail);
-
-    // ####################################################
-
-    passwordLabel = new JLabel("Enter Your Password");
-    passwordLabel.setBounds(850, 350, 300, 20);
-    passwordLabel.setFont(new Font("Mongolian Baiti", Font.BOLD, 18));
-    passwordLabel.setForeground(Color.BLACK);
-    add(passwordLabel);
-
-    // Create and configure text field for entering password
-    userPassword = new JPasswordField();
-    userPassword.setBounds(850, 380, 300, 40);
-    userPassword.setFont(new Font("Times New Roman", Font.BOLD, 20));
-    add(userPassword);
 
     // ####################################################
 
@@ -93,19 +74,8 @@ public class Login extends Frames implements ActionListener {
 
     // ####################################################
 
-    // Create and configure button for going back
-    signUp = new JButton("sign up");
-    signUp.setBounds(1030, 500, 120, 40);
-    signUp.setBackground(Color.decode("#99e6ff"));
-    signUp.setForeground(Color.BLACK);
-    signUp.setVisible(true); // Initially hidden
-    signUp.addActionListener(this);
-    add(signUp);
-
-    // ####################################################
-
     // Create and configure error message label (initially hidden)
-    errorMessageLabel = new JLabel("Invalid email or password. Please try again.");
+    errorMessageLabel = new JLabel("Invalid email or name. Please try again.");
     errorMessageLabel.setBounds(850, 450, 400, 20);
     errorMessageLabel.setFont(new Font("Arial", Font.BOLD, 14));
     errorMessageLabel.setForeground(Color.RED);
@@ -130,16 +100,6 @@ public class Login extends Frames implements ActionListener {
     if (e.getSource() == Login) {
       isEqualLogin();
     } 
-    else if (e.getSource() == signUp) {
-      
-      String buttonText = signUp.getText();
-      if (buttonText.equals("sign up")){
-        isEqualSinUp();
-      } 
-      else if (buttonText.equals("submit")){
-        isEqualSubmit();
-      }
-    }
   
   }
 
@@ -158,81 +118,48 @@ public class Login extends Frames implements ActionListener {
   
 
   // Method to validate email and password 
-  private boolean isValidUser(String email, String password) {
+  private boolean isValidUser(String email, String name) {
       // Hardcoded email and password for demonstration
       String validEmail = "1";
-      String validPassword = "1";
+      String validName = "1";
 
-      // Validate email and password
-      return email.equals(validEmail) && password.equals(validPassword);
-  }
-
-
-  private void isEqualSubmit() {
-    String name = userName.getText();
-    String email = userEmail.getText();
-    String password = new String(userPassword.getPassword());
-
-    if (email.isEmpty() || password.isEmpty() || name.isEmpty()) {
-      errorMassageEmpty.setVisible(true);
-    } 
-    else {
-      new Rules(name);
-      this.setVisible(false);
-    }
-  }
-
-
-  private void isEqualSinUp(){
-    userEmail.setText(""); // Clear text fields
-    userPassword.setText(""); // Clear password fields
-    userName.setText("");
-    heading.setText("Create Your Account");
-    heading.setBounds(800, 60, 400, 45);
-    userName.setVisible(true);
-    nameLabel.setVisible(true);
-    errorMessageLabel.setVisible(false);
-    errorMassageEmpty.setVisible(false);
-    Login.setVisible(true);
-    signUp.setText("submit");
+      return email.equals(validEmail) && name.equals(validName);
   }
 
 
   private void isEqualLogin(){
     // Get email and password from text fields
     String email = userEmail.getText();
-    String password = new String(userPassword.getPassword());
+    String name = userName.getText();
 
     heading.setText("Quize App");
     heading.setBounds(900, 60, 300, 45);
-    userName.setVisible(false);
-    nameLabel.setVisible(false);
     userEmail.setText(""); // Clear text fields
-    userPassword.setText(""); // Clear password fields
+    userName.setText("");
     errorMessageLabel.setVisible(false);
-    signUp.setText("sign up");
     errorMassageEmpty.setVisible(false);
 
     // Check if email and password are empty
-    if (email.isEmpty() || password.isEmpty()) {
+    if (email.isEmpty() || name.isEmpty()) {
       errorMassageEmpty.setVisible(true);
     } 
     else {
       
       // Dummy validation (replace with your actual validation logic)
-      if (isValidUser(email, password)) {
+      if (isValidUser(email, name)) {
 
         iconWorld(false);
 
         // If email and password are valid, proceed to rules window
-        new Rules(email);
+        new Rules(name);
         setVisible(false);
     
       } 
       else {
         // If email and password are not valid, show error message
+        errorMassageEmpty.setVisible(false);
         userEmail.setText(""); // Clear text fields
-        userPassword.setText(""); // Clear password fields
+        userName.setText(""); // Clear password fields
         errorMessageLabel.setVisible(true); // Show error message
       }
     }
