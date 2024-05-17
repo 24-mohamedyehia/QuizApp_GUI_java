@@ -91,8 +91,8 @@ public class Home extends Frames implements ActionListener{
 
   private void isEqual_start(){
     if(validateInput()){
-      // invalid category
-      new Quiz("java");
+      int numOfQuestions = Integer.parseInt(numOfQuestionsTextField.getText());
+      new Quiz("java", numOfQuestions);
       Home.this.dispose();
     }
     else{

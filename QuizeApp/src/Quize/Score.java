@@ -6,9 +6,12 @@ import java.awt.event.*;
 
 public class Score extends Frames implements ActionListener {
 
+  String name;
+
   Score(String name, int score) {
     
     super();
+    this.name = name;
     
     ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/score.png"));
     Image i2 = i1.getImage().getScaledInstance(300, 250, Image.SCALE_DEFAULT);
@@ -37,7 +40,7 @@ public class Score extends Frames implements ActionListener {
   
   @Override
   public void actionPerformed(ActionEvent ae) {
-      new Login();
-      setVisible(false);
+      new Home(name);
+      this.dispose();
   }
 }
