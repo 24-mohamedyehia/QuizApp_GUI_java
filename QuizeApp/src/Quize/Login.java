@@ -90,17 +90,9 @@ public class Login extends Frames implements ActionListener {
     errorMassageEmpty.setVisible(false); // Initially hidden
     add(errorMassageEmpty);
 
-  }
-
-  // ########################## Events ##########################################
-    // Method to handle button clicks
-  @Override
-  public void actionPerformed(ActionEvent e) {
-
-    if (e.getSource() == Login) {
-      isEqualLogin();
-    } 
-  
+    // Ensure all components are laid out and visible
+    revalidate();
+    repaint();
   }
 
   // ######################## Methods ############################################
@@ -114,8 +106,6 @@ public class Login extends Frames implements ActionListener {
     validate(); // Ensure the new component is displayed
     shieldLabel.setVisible(status);
   }
-
-  
 
   // Method to validate email and password 
   private boolean isValidUser(String email, String name) {
@@ -152,7 +142,7 @@ public class Login extends Frames implements ActionListener {
 
         // If email and password are valid, proceed to rules window
         new Rules(name);
-        setVisible(false);
+        this.setVisible(false);
     
       } 
       else {
@@ -165,6 +155,13 @@ public class Login extends Frames implements ActionListener {
     }
   }
 
-
-
+  // ########################## Events ##########################################
+    // Method to handle button clicks
+    @Override
+    public void actionPerformed(ActionEvent e) {
+  
+      if (e.getSource() == Login) {
+        isEqualLogin();
+      } 
+    }
 }
