@@ -18,12 +18,15 @@ public class Login extends Frames implements ActionListener {
   JPasswordField userPassword;
   JLabel errorMessageLabel, heading, emaiLabel, nameLabel, errorMassageEmpty, image;
 
-
-
   // Constructor for initializing the login window
   public Login() {
     super();
+    addGuiComponents();
+  }
 
+  // ######################## Methods ############################################
+
+  private void addGuiComponents(){
     iconWorld(true);
 
     // ####################################################
@@ -91,11 +94,10 @@ public class Login extends Frames implements ActionListener {
     add(errorMassageEmpty);
 
     // Ensure all components are laid out and visible
-    revalidate();
     repaint();
   }
 
-  // ######################## Methods ############################################
+  // ############################################################
 
   private void iconWorld(boolean status){
     ImageIcon shieldIcon = new ImageIcon(getClass().getResource("/icons/world-creativity-and-innovation-day.gif"));
@@ -107,6 +109,8 @@ public class Login extends Frames implements ActionListener {
     shieldLabel.setVisible(status);
   }
 
+  // ################################################################
+
   // Method to validate email and password 
   private boolean isValidUser(String email, String name) {
       // Hardcoded email and password for demonstration
@@ -116,6 +120,7 @@ public class Login extends Frames implements ActionListener {
       return email.equals(validEmail) && name.equals(validName);
   }
 
+  // ################################################################
 
   private void isEqualLogin(){
     // Get email and password from text fields
