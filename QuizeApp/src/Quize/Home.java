@@ -109,8 +109,7 @@ public class Home extends Frames implements ActionListener{
       isEqual_start();
     }
     else if (e.getSource() == exitButton) {
-      // dispose of this screen
-      Home.this.dispose();
+      System.exit(0); // Close the program
     }
 
     else if (e.getSource() == BackButton) {
@@ -120,11 +119,4 @@ public class Home extends Frames implements ActionListener{
   }
 
 
-
 }
-
-
-
-
-
-

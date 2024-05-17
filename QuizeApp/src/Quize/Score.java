@@ -36,6 +36,9 @@ public class Score extends Frames implements ActionListener {
     submit.setForeground(Color.WHITE);
     submit.addActionListener(this);
     add(submit);
+
+    // Ensure all components are laid out and visible
+    // repaint();
   }
   
   @Override
@@ -43,4 +46,9 @@ public class Score extends Frames implements ActionListener {
       new Home(name);
       this.dispose();
   }
+
+
+  // public static void main(String[] args) {
+  //   new Score("java", 3);
+  // }
 }
