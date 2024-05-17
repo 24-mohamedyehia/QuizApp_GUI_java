@@ -13,7 +13,7 @@ import java.awt.event.*;
 public class Login extends Frames implements ActionListener {
 
   // Declare buttons and text field for login
-  JButton Login, signUp;
+  JButton Login, cancel;
   JTextField userEmail, userName;
   JPasswordField userPassword;
   JLabel errorMessageLabel, heading, emaiLabel, nameLabel, errorMassageEmpty, image;
@@ -75,6 +75,16 @@ public class Login extends Frames implements ActionListener {
     Login.addActionListener(this);
     add(Login);
 
+    // ###################################################
+    // Create and configure button for going back
+    cancel = new JButton("cancel");
+    cancel.setBounds(1030, 500, 120, 40);
+    cancel.setBackground(Color.decode("#99e6ff"));
+    cancel.setForeground(Color.BLACK);
+    cancel.setVisible(true); // Initially hidden
+    cancel.addActionListener(this);
+    add(cancel);
+
     // ####################################################
 
     // Create and configure error message label (initially hidden)
@@ -105,7 +115,6 @@ public class Login extends Frames implements ActionListener {
     shieldLabel.setSize(shieldIcon.getIconWidth() , shieldIcon.getIconHeight());
     shieldLabel.setBounds(0, 0, 700, 700);
     add(shieldLabel);
-    validate(); // Ensure the new component is displayed
     shieldLabel.setVisible(status);
   }
 
@@ -126,11 +135,6 @@ public class Login extends Frames implements ActionListener {
     // Get email and password from text fields
     String email = userEmail.getText();
     String name = userName.getText();
-
-    heading.setText("Quize App");
-    heading.setBounds(900, 60, 300, 45);
-    userEmail.setText(""); // Clear text fields
-    userName.setText("");
     errorMessageLabel.setVisible(false);
     errorMassageEmpty.setVisible(false);
 
@@ -142,22 +146,23 @@ public class Login extends Frames implements ActionListener {
       
       // Dummy validation (replace with your actual validation logic)
       if (isValidUser(email, name)) {
-
-        iconWorld(false);
-
         // If email and password are valid, proceed to rules window
         new Home(name);
-        this.setVisible(false);
+        this.dispose();
     
       } 
       else {
         // If email and password are not valid, show error message
         errorMassageEmpty.setVisible(false);
-        userEmail.setText(""); // Clear text fields
-        userName.setText(""); // Clear password fields
         errorMessageLabel.setVisible(true); // Show error message
       }
     }
+  }
+
+  // #############################################################
+  private void isEqaul_cancel(){
+        userEmail.setText(""); // Clear text fields
+        userName.setText("");
   }
 
   // ########################## Events ##########################################
@@ -168,5 +173,8 @@ public class Login extends Frames implements ActionListener {
       if (e.getSource() == Login) {
         isEqualLogin();
       } 
+      else if(e.getSource() == cancel){
+        isEqaul_cancel();
+      }
     }
 }
