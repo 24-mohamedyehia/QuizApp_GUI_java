@@ -146,7 +146,7 @@ public class Login extends Frames implements ActionListener {
         iconWorld(false);
 
         // If email and password are valid, proceed to rules window
-        new Rules(name);
+        new Home(name);
         this.setVisible(false);
     
       } 

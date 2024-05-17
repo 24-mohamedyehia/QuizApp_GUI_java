@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class Rules extends Frames implements ActionListener{
+public class Home extends Frames implements ActionListener{
   // Declare variables for player name, start button, and back button
   String name;
   JButton startButton, exitButton, BackButton;
@@ -13,12 +13,13 @@ public class Rules extends Frames implements ActionListener{
   private JTextField numOfQuestionsTextField;
 
   // Constructor for initializing the Rules window with the player's name
-  Rules(String name) {
+  Home(String name) {
     super();
     this.name = name;
     addGuiComponents();
   }
-  
+
+  //################################### Mehtods ############################################
   private void addGuiComponents(){
 
     // title label
@@ -36,7 +37,7 @@ public class Rules extends Frames implements ActionListener{
     add(chooseCategoryLabel);
 
     // category drop down menu
-    String[]CA=new String[]{"JAVA"};
+    String[]CA=new String[]{"JAVA","C++"};
     categoriesMenu = new JComboBox(CA);
     categoriesMenu.setBounds(500, 100, 337, 45);
     add(categoriesMenu);
@@ -78,6 +79,7 @@ public class Rules extends Frames implements ActionListener{
     add(BackButton);
   }
 
+  // ###################################################################
   private boolean validateInput(){
     // num of questions field must not be empty
     if (numOfQuestionsTextField.getText().replaceAll(" ", "").length() <= 0) return false;
@@ -85,40 +87,39 @@ public class Rules extends Frames implements ActionListener{
     return categoriesMenu.getSelectedItem() != null;
   }
 
+  // ###################################################################
+
+  private void isEqual_start(){
+    if(validateInput()){
+      // invalid category
+      new Quiz("java");
+      Home.this.dispose();
+    }
+    else{
+      JOptionPane.showMessageDialog(Home.this, "Please enter valid input.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  // ####################################### Events ##############################################
+
   @Override
   public void actionPerformed(ActionEvent e) {
 
     if (e.getSource() == startButton) {
-      if(validateInput()){
-        int numOfQuestions = Integer.parseInt(numOfQuestionsTextField.getText());
-        JOptionPane.showMessageDialog(this, "Number of Questions: " + numOfQuestions, "Number of Questions", JOptionPane.INFORMATION_MESSAGE);
-        // invalid category
-        Quiz quizScreenGui = new Quiz("java");
-        quizScreenGui.setLocationRelativeTo(Rules.this);
-          // dispose of this screen
-          Rules.this.dispose();
-          // display quiz screen
-        quizScreenGui.setVisible(true);}
-      else{
-        JOptionPane.showMessageDialog(Rules.this, "Please enter valid input.", "Error", JOptionPane.ERROR_MESSAGE);
-      }
+      isEqual_start();
     }
     else if (e.getSource() == exitButton) {
       // dispose of this screen
-      Rules.this.dispose();
+      Home.this.dispose();
     }
 
     else if (e.getSource() == BackButton) {
-      // display title screen
-      Login titleScreenGui = new Login();
-      titleScreenGui.setLocationRelativeTo(Rules.this);
-      // dispose of this screen
-      Rules.this.dispose();
-
-      // make title screen visible
-      titleScreenGui.setVisible(true);
+      new Login();
+      Home.this.dispose();
     }
   }
+
+
 
 }
 
